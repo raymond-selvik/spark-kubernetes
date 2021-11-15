@@ -6,7 +6,6 @@ FROM spark-base:3.2.0
 COPY --from=py3 / /
 
 RUN pip --no-cache-dir install \
-    jupyterlab \
     pyspark==3.2.0
 
 WORKDIR /job

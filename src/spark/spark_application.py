@@ -22,6 +22,8 @@ class SparkApplication:
         spark_conf = SparkConf().setAll(config.items("spark"))
         return spark_conf
 
+    def stop(self):
+        self.spark.stop()
         
 
         
