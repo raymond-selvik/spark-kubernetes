@@ -16,7 +16,7 @@ def main():
     app = SparkApplication("kubernetes-demo", './config/config.ini')
     print(app.spark.version)
     print("Spark Session created")
-    input("...Press a button to continue")
+    input("...Press a key to continue\n")
 
 
 
@@ -38,26 +38,31 @@ def main():
     ["address", "city", "personId"],
     )
 
-    print(df_person.count())
-    print(df_address.count())
+    df_person.show()
+    print(f"Person Count: {df_person.count()}")
 
-    input("...Press a button to continue")
+    df_address.show()
+    print(f"Address Count: {df_person.count()}")
 
+    input("...Press a key to continue\n")
 
+    print("SELECT * FROM df_person WHERE age < 40")
     df_person.select("*").where(df_person['age']< 40).show()
-    input("...Press a button to continue")
+    input("...Press a button to continue\n")
     
 
+    print("SELECT * FROM df_person INNER JOIN df_adress ON df_person.id = df_adress.personId")
     df_person_by_address = df_person.join(df_address, df_person['id'] == df_address['personId'], "inner")
     df_person_by_address.show()
 
 
-    input("Press a button to continue")
+    input("Press a key to continue\n")
 
+    print("ALTER TABLE df_person_by_adress DROP personId")
     df_person_by_address_cleaned = df_person_by_address.drop('personId')
     df_person_by_address_cleaned.show()
 
-    input("Press a button to end program.")
+    input("Press a key to end program.")
     app.stop()
     
 
